@@ -17,4 +17,8 @@ int main()
     {
         std::cout << (trie.find(str[i]) ? "true" : "false") << '\n';
     }
+
+    trie.remove(str[2]);
+
+    std::cout << (trie.find(str[2]) ? "true" : "false") << '\n';
 }

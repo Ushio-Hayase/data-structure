@@ -30,6 +30,26 @@ class TrieNode
         return node[current_char]->find(str, idx + 1);
     }
 
+    bool remove(std::string str, size_t idx)
+    {
+        char current_char = str[idx];
+        if (idx == str.size() - 1)
+        {
+            if (!is_finish) return false;
+
+            return true;
+        }
+
+        if (node[current_char] != 0 && node[current_char]->remove(str, idx + 1))
+        {
+            delete node[current_char];
+            this->node.erase(current_char);
+            if (this->node.empty()) return true;
+        }
+
+        return false;
+    }
+
    private:
     std::map<char, TrieNode*> node;
     char value;
@@ -44,6 +64,8 @@ class Trie
     void insert(std::string str) { root.insert(str, 0); }
 
     bool find(std::string str) { return root.find(str, 0); }
+
+    void remove(std::string str) { root.remove(str, 0); }
 
    private:
     TrieNode root;
